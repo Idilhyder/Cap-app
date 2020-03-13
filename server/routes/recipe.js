@@ -27,6 +27,15 @@ router.get('/:id', (req, res) => {
     });
 })
 
+router.get('/name', (req, res) => {
+    RecipeItem.findById(req.params.name)
+   .then(recipeFound => {
+       return res.status(200).json(recipeFound)
+   })
+   .catch ((error) => {
+       console.log('error:', error)
+   });
+})
 
 
 
