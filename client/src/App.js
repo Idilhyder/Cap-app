@@ -1,16 +1,33 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import RecipeSearch from './components/recipeSearch';
 
 
 
 class App extends Component {
+  constructor () {
+    super();
+    this.state = {
+          name: '',
+          pantry: []
+        };
+  }
+  getPantryItem = () => {
+    axios.get('http://localhost:5000/pantry')
+    .then((response)=> {
+      const data= response.data.pantryData;
+      this.setState({ pantry: data});
+      console.log('Pantry received')
+    })
+    .catch(() => {
+      console.log('Error retrieving pantry')
+    });
+  }
 
-    state = {
-      name: '',
-      body: ''
-    };
-  
-  
+  componentDidMount = () => {
+    this.getPantryItem();
+  }
+
   handleChange = ({ target }) => {
     const { name, value }= target;
     this.setState({
@@ -22,7 +39,6 @@ class App extends Component {
 
     const payload = {
       name: this.state.name,
-      body: this.state.body,
     }
 
     axios({
@@ -42,15 +58,11 @@ class App extends Component {
   resetUserInputs = () => {
     this.setState({
       name: '',
-      body: ''
     });
   };
 
-
   render() {
-
-    console.log(this.state)
-
+    console.log(this.state.pantry)
     return (
       <>
       <h1>TEST PANTRY</h1>
@@ -66,23 +78,19 @@ class App extends Component {
           </div>
           <button>Submit</button>
       </form>
-
-      <h1>TEST RECIPE</h1>
-      <form onSubmit={this.submit}>
-        <div className="form-input">
-          <input
-          type='text'
-          name='search'
-          placeholder="Enter item"
-          value={this.state.search}
-          onChange={this.handleChange}
-          />
-          </div>
-          <button>Search</button>
-      </form>
+      <RecipeSearch/>
+      <div className="pantry">
+      <h3>Your Pantry</h3>
+      {this.state.pantry.map(item=>{
+        return (
+        <p>{item.name}</p>
+        )
+      })}
+        </div>
       </>
     );
-  }
 }
+}
+
 
 export default App;
