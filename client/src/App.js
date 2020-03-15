@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import RecipeSearch from './components/recipeSearch';
+import RecipeSearch from "./components/recipeSearch1.js"
+
 
 
 
@@ -24,17 +25,6 @@ class App extends Component {
       console.log('Error retrieving pantry')
     });
   }
-  // getRecipeItem = () => {
-  //   axios.get(`http://localhost:5000/recipe?limit=2`)
-  //   .then((response)=> {
-  //     const data= response.data.recipeData;
-  //     this.setState({ recipe: data});
-  //     console.log('Recipe received')
-  //   })
-  //   .catch(() => {
-  //     console.log('Error retrieving Recipe')
-  //   });
-  // }
 
 
   componentDidMount = () => {
@@ -94,7 +84,6 @@ class App extends Component {
           </div>
           <button>Submit</button>
       </form>
-      <RecipeSearch/>
       <div className="pantry">
       <h3>Your Pantry</h3>
       {this.state.pantry.map(item=>{
@@ -103,6 +92,8 @@ class App extends Component {
         )
       })}
         </div>
+        <h1>YOUR SEARCH RESULTS</h1>
+        <RecipeSearch/>
         
       </>
     );

@@ -15,6 +15,20 @@ router.get('/', (req, res) => {
             console.log('error:', error)
         });
 })
+router.get('/search/:query', (req, res) => {
+    const query = req.params.query;
+    SubItem.apiQuery(req.query).find({
+        $text: { 
+            $search: query
+        }
+    }).limit(5)
+    .then(recipeFound => {
+        return res.status(200).json(recipeFound)
+    })
+    .catch ((error) => {
+        console.log('error:', error)
+    });
+})
 
 // GET ONE ITEM
 router.get('/:id', (req, res) => {

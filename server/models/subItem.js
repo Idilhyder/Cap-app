@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const mongooseApiQuery = require("mongoose-api-query");
 const Schema = mongoose.Schema;
 
 const SubItemSchema = new Schema({
@@ -13,7 +13,8 @@ const SubItemSchema = new Schema({
         required: true
       },
     })
-
+SubItemSchema.indexes({'$**': 'text'});
+SubItemSchema.plugin(mongooseApiQuery);
 const SubItem= mongoose.model('SubItem', SubItemSchema);
 
 module.exports = SubItem;

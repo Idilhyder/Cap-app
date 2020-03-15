@@ -2,15 +2,15 @@ const mongoose = require('mongoose')
 const mongooseApiQuery = require("mongoose-api-query");
 const Schema = mongoose.Schema;
 
-const PantryItemSchema = new Schema({
+const IngredientsSchema = new Schema({
   _id: Schema.Types.ObjectId,
     name: {
         type: String,
         required: true
       },
 })
-PantryItemSchema.indexes({'$**': 'text'});
-PantryItemSchema.plugin(mongooseApiQuery);
-const PantryItem= mongoose.model('PantryItem', PantryItemSchema);
+IngredientsSchema.indexes({'$**': 'text'});
+IngredientsSchema.plugin(mongooseApiQuery);
+const Ingredients= mongoose.model('Ingredients', IngredientsSchema);
 
-module.exports = PantryItem;
+module.exports = Ingredients;

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
-
+const mongooseApiQuery = require("mongoose-api-query");
 const Schema = mongoose.Schema;
+
 
 const RecipeItemSchema = new Schema({
     _id: Schema.Types.ObjectId,
@@ -17,9 +18,9 @@ const RecipeItemSchema = new Schema({
         required: true
       },
     ingredients: {
-        type: String,
-        required: true
-      },
+      type:Array, 
+      default: []
+    },
     directions:{
         type: String,
         required: true
@@ -39,8 +40,8 @@ const RecipeItemSchema = new Schema({
     calories: {
         type: String,
         required: true
-      }
-    })
+      },
+    });
 
 // const recipeData = {
 //     name: 'garlic',
@@ -53,6 +54,9 @@ const RecipeItemSchema = new Schema({
 //     readyIn: 'no',
 //     calories:'a million',
 // }
+
+RecipeItemSchema.indexes({'$**': 'text'});
+RecipeItemSchema.plugin(mongooseApiQuery);
 const RecipeItem= mongoose.model('RecipeItem', RecipeItemSchema);
 // const newRecipeItem = new RecipeItem(recipeData);
 

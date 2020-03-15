@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const mongooseApiQuery = require("mongoose-api-query");
 const PantryItem = require('../models/pantryItem');
 
 // GET ALL PANTRY
@@ -13,6 +13,20 @@ router.get('/', (req, res) => {
         .catch ((error) => {
             console.log('error:', error)
         });
+})
+router.get('/search/:query', (req, res) => {
+    const query = req.params.query;
+    PantryItem.apiQuery(req.query).find({
+        $text: { 
+            $search: query
+        }
+    }).limit(5)
+    .then(recipeFound => {
+        return res.status(200).json(recipeFound)
+    })
+    .catch ((error) => {
+        console.log('error:', error)
+    });
 })
 
 // GET ONE PANTRY ITEM
