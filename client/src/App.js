@@ -9,11 +9,12 @@ class App extends Component {
     super();
     this.state = {
           name: '',
-          pantry: []
+          pantry: [],
+          recipe: [],
         };
   }
   getPantryItem = () => {
-    axios.get('http://localhost:5000/pantry')
+    axios.get(`http://localhost:5000/pantry`)
     .then((response)=> {
       const data= response.data.pantryData;
       this.setState({ pantry: data});
@@ -23,6 +24,18 @@ class App extends Component {
       console.log('Error retrieving pantry')
     });
   }
+  // getRecipeItem = () => {
+  //   axios.get(`http://localhost:5000/recipe?limit=2`)
+  //   .then((response)=> {
+  //     const data= response.data.recipeData;
+  //     this.setState({ recipe: data});
+  //     console.log('Recipe received')
+  //   })
+  //   .catch(() => {
+  //     console.log('Error retrieving Recipe')
+  //   });
+  // }
+
 
   componentDidMount = () => {
     this.getPantryItem();
@@ -42,13 +55,14 @@ class App extends Component {
     }
 
     axios({
-      url: 'http://localhost:5000/pantry',
+      url: `http://localhost:5000/pantry`,
       method: 'POST',
       data: payload
     })
     .then(()=> {
       console.log('Data sent');
       this.resetUserInputs();
+      this.getPantryItem();
     })
     .catch(()=> {
       console.log('Data not sent');
@@ -60,6 +74,8 @@ class App extends Component {
       name: '',
     });
   };
+
+
 
   render() {
     console.log(this.state.pantry)
@@ -87,6 +103,7 @@ class App extends Component {
         )
       })}
         </div>
+        
       </>
     );
 }

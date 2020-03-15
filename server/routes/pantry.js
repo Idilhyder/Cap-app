@@ -51,6 +51,7 @@ router.patch('/:id', (req, res) => {
 
 // DELETE ONE PANTRY ITEM
 router.delete('/:id', (req, res) => {
+    
 })
 
 

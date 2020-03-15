@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const RecipeItem = require('../models/recipeItem');
+const RecipeItem = require(`../models/recipeItem`);
 
 
 // GET ALL RECIPES
 router.get('/', (req, res) => {
-    RecipeItem.find({})
+    RecipeItem.find({}).limit(5)
+        
         .then((recipeData) => {
             console.log('Data:', recipeData);
             res.json({recipeData});
@@ -18,7 +19,7 @@ router.get('/', (req, res) => {
 
 // GET ONE RECIPE
 router.get('/:id', (req, res) => {
-     RecipeItem.findById(req.params.id)
+    RecipeItem.findById(req.params.id)
     .then(recipeFound => {
         return res.status(200).json(recipeFound)
     })
@@ -26,16 +27,41 @@ router.get('/:id', (req, res) => {
         console.log('error:', error)
     });
 })
+// router.get('/:id', (req, res) => {
+//     RecipeItem.findOne(req.params.name)
+//    .then(recipeFound => {
+//        return res.status(200).json(recipeFound)
+//    })
+//    .catch ((error) => {
+//        console.log('error:', error)
+//    });
+// })
+// router.get("/search", function(req, res) {  
+//     RecipeItem.find({})
+//         .then((recipeData) => {
+//             console.log('Data:', recipeData);
+//             res.json({recipeData});
+//         })
+//         .catch ((error) => {
+//             console.log('error:', error)
+//         });
+//   });
+//   router.post("/search", function(req, res) {  
+//     db.collection('recipeitems').find({
+//       "$text": {
+//         "$search": req.body.query
+//       }
+//     },
 
-router.get('/name', (req, res) => {
-    RecipeItem.findById(req.params.name)
-   .then(recipeFound => {
-       return res.status(200).json(recipeFound)
-   })
-   .catch ((error) => {
-       console.log('error:', error)
-   });
-})
+// router.get('/name', (req, res) => {
+//     RecipeItem.findById(req.params.name)
+//    .then(recipeFound => {
+//        return res.status(200).json(recipeFound)
+//    })
+//    .catch ((error) => {
+//        console.log('error:', error)
+//    });
+// })
 
 
 
