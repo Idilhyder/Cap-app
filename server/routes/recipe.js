@@ -3,22 +3,6 @@ const router = express.Router();
 
 const RecipeItem = require(`../models/recipeItem`);
 
-// SEARCH TERM
-router.get('/search/:query', (req, res) => {
-    const query = req.params.query;
-    RecipeItem.apiQuery(req.query).find({
-        $text: { 
-            '$search': query
-        }
-    }).limit(5)
-    .exec()
-    .then(recipeFound => {
-        return res.status(200).json(recipeFound)
-    })
-    .catch ((error) => {
-        console.log('error:', error)
-    });
-})
 
 // GET ALL RECIPES
 router.get('/', (req, res) => {
@@ -32,18 +16,37 @@ router.get('/', (req, res) => {
         });
 })
 
+// SEARCH TERM
+router.get('/search/:query', (req, res) => {
+    const query = RecipeItem.apiQuery(req.query)
+    .find({
+        "$text": {
+            "$search": req.params.query
+        }
+    })
+    .limit(5)
+    .then(recipeFound => {
+        return res.status(200).json(recipeFound)
+    })
+    .catch ((error) => {
+        console.log('error:', error)
+    });
+})
+
+// GET ONE RECIPE
+router.get('/:id', (req, res) => {
+    RecipeItem.findById(req.params.id)
+   .then(recipeFound => {
+       return res.status(200).json(recipeFound)
+   })
+   .catch ((error) => {
+       console.log('error:', error)
+   });
+})
+// try passing items in request body
 
 
-// // GET ONE RECIPE
-// router.get('/:id', (req, res) => {
-//     RecipeItem.apiQuery(req.query).find({_id: req.params.id})
-//    .then(recipeFound => {
-//        return res.status(200).json(recipeFound)
-//    })
-//    .catch ((error) => {
-//        console.log('error:', error)
-//    });
-// })
+
 
 
 // router.get("/search", function(req, res) {  

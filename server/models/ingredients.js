@@ -3,7 +3,7 @@ const mongooseApiQuery = require("mongoose-api-query");
 const Schema = mongoose.Schema;
 
 const IngredientsSchema = new Schema({
-  _id: Schema.Types.ObjectId,
+  
     name: {
         type: String,
         required: true

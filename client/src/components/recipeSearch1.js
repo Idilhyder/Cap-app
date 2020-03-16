@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Recipe from './recipe';
-import ReactDOM from "react-dom";
-import {BrowserRouter as Router, Switch, Route, Link, useParams} from "react-router-dom";
+
 
 
 
@@ -12,10 +11,14 @@ state = {
     results: [],
 }
 
-getInfo = () => {
+getRecipeItem = () => {
+    console.log('get recipe called')
+    console.log(this.state.query)
+
     axios.get(`http://localhost:5000/recipe/search/${this.state.query}`)
     .then((response)=> {
-        const data= response.data.recipeData;
+        const data= response.data;
+        console.log(data)
         this.setState({ results: data});
         console.log('Recipe received')
       })
@@ -23,31 +26,37 @@ getInfo = () => {
         console.log('Error retrieving recipe')
       });
 }
-        
 
     
 componentDidMount = () => {
-    this.getInfo();
-    let query = this.getUrlParams().toString();
+    this.getRecipeItem();
 }
 
-handleInputChange = () => {
+handleInputChange = (event) => {
+    event.preventDefault();
     this.setState({
     query: this.search.value
     }, () => {
-    if (this.state.query && this.state.query.length > 1) {
-        if (this.state.query.length % 2 === 0) {
-        this.getInfo()
-        }
-    } else if (!this.state.query) {
-    }
+    // if (this.state.query && this.state.query.length > 1) {
+    //     if (this.state.query.length === 0) {
+    //     this.getRecipeItem()
+    //     }
+    // } else if (!this.state.query) {
+    // }
     })
+}
+
+handleSubmit = (event) => {
+    event.preventDefault();
+    this.getRecipeItem();
 }
 
 render() {
     console.log(this.state.results)
+    
     return (
-    <form>
+    <form 
+        onSubmit={this.handleSubmit}>
         <input
         placeholder="Search for..."
         ref={input => this.search = input}
