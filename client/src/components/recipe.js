@@ -1,12 +1,27 @@
 import React from "react";
 
-const Recipe = props => {
-
+const Recipe = (props) => {
+console.log(props)
     return(
     <div className="card-body">
-    <h5 className="card-title">{props.name}</h5>
-    <p className="card-text">{props.directions}</p>
+    {props.list.map(item=>{
+    return (
+        <>
+    <ul key={item.id}>
+    <h5 className="card-title">{item.name}</h5>
+    <li className="card-text">{item.directions}</li>
+    <li className="card-text">{item.cook}</li>
+    <li className="card-text">{item.prep}</li>
+    <li className="card-text">{item.readyIn}</li>
+    <li className="card-text">{item.calories}</li>
+    <li className="card-text">{item.rating}</li>
+    <li className="card-text">{item.ingredients}</li>
+    </ul>
+    </>
+    )
+    })} 
     </div>
+    
 );
 }
 

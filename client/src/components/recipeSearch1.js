@@ -1,81 +1,62 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import axios from 'axios';
 import Recipe from './recipe';
-const queryString = require('query-string');
-
+import ReactDOM from "react-dom";
+import {BrowserRouter as Router, Switch, Route, Link, useParams} from "react-router-dom";
 
 
 
 class RecipeSearch extends Component {
-    constructor() {
-        super();
-        this.state= {
-            query: '',
-            recipe: []
-        }
-    }
+state = {
+    query: '',
+    results: [],
+}
 
-
-getRecipeItem = (searchInput) => {
-    axios.get(`http://localhost:5000/recipe/search/${searchInput}`)
+getInfo = () => {
+    axios.get(`http://localhost:5000/recipe/search/${this.state.query}`)
     .then((response)=> {
-      const data= response.data.recipeData;
-      this.setState({ recipe: data});
-      console.log('recipe received')
-    })
-    .catch(() => {
-      console.log('Error retrieving recipe')
-    });
-  }
-
-handleSearch = () => {
-    this.getRecipeItem(this.state.query);
-    };
-
-handleOnChange = event => {
-    this.setState({ query: event.target.value });
-    };
-
-
-render() {  
-    
-    return (
+        const data= response.data.recipeData;
+        this.setState({ results: data});
+        console.log('Recipe received')
+      })
+      .catch(() => {
+        console.log('Error retrieving recipe')
+      });
+}
         
-    <div>
-        <div>
-            <div className="container">
-            <div className="row">
-                <form>
-                <label>Search</label>
-                <input
-                    type="text"
-                    onChange={event => this.handleOnChange(event)}
-                    value={this.state.query}
-                    placeholder="Enter items"
-                    name="search"
-                />
-                <button onClick={this.handleSearch}>Search</button>
-                </form>
-                {this.state.meals ? (
-            <div>
-            {this.state.recipe.map((meal, index) => (
-            <div key={index}>
-            <h1>{meal.name}</h1>
-            <img src={meal.image} alt="meal-thumbnail" />
-            </div>
-            ))}
-            </div>
-            ) : (
-            <p>Try searching for a meal</p>
-            )}
-            </div>
-        </div>
-        </div>
-    </div>
-    );
+
+    
+componentDidMount = () => {
+    this.getInfo();
+    let query = this.getUrlParams().toString();
+}
+
+handleInputChange = () => {
+    this.setState({
+    query: this.search.value
+    }, () => {
+    if (this.state.query && this.state.query.length > 1) {
+        if (this.state.query.length % 2 === 0) {
+        this.getInfo()
+        }
+    } else if (!this.state.query) {
+    }
+    })
+}
+
+render() {
+    console.log(this.state.results)
+    return (
+    <form>
+        <input
+        placeholder="Search for..."
+        ref={input => this.search = input}
+        onChange={this.handleInputChange}
+        />
+        <Recipe list={this.state.results} />
+    </form>
+    )
 }
 }
 
-
-
-export default RecipeSearch;
+export default RecipeSearch
