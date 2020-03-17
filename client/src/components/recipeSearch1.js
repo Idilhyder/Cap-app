@@ -27,6 +27,7 @@ getRecipeItem = () => {
       });
 }
 
+
     
 componentDidMount = () => {
     this.getRecipeItem();
@@ -35,7 +36,7 @@ componentDidMount = () => {
 handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
-    query: this.search.value
+    query: this.search.value,
     }, () => {
     // if (this.state.query && this.state.query.length > 1) {
     //     if (this.state.query.length === 0) {
@@ -45,6 +46,7 @@ handleInputChange = (event) => {
     // }
     })
 }
+
 
 handleSubmit = (event) => {
     event.preventDefault();
@@ -62,7 +64,8 @@ render() {
         ref={input => this.search = input}
         onChange={this.handleInputChange}
         />
-        <Recipe list={this.state.results} />
+        <Recipe 
+        list={this.state.results} />
     </form>
     )
 }

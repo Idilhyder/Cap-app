@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import RecipeSearch from "./../components/recipeSearch1.js";
 import Pantry from "./../components/pantry";
+import Select from "./../components/selectMeal";
 
 
 
@@ -91,6 +92,9 @@ class Main extends Component {
 
     <h1>YOUR SEARCH RESULTS</h1>
     <RecipeSearch/>
+      
+      <h1>SEARCH VIA PANTRY TEST</h1>
+      <Select/>
       </>
     );
 }

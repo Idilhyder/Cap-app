@@ -16,12 +16,29 @@ router.get('/', (req, res) => {
         });
 })
 
-// SEARCH TERM
+// SEARCH ALL RECIPES WITH ONE KEY WORD
 router.get('/search/:query', (req, res) => {
     const query = RecipeItem.apiQuery(req.query)
     .find({
         "$text": {
             "$search": req.params.query
+        }
+    })
+    .limit(5)
+    .then(recipeFound => {
+        return res.status(200).json(recipeFound)
+    })
+    .catch ((error) => {
+        console.log('error:', error)
+    });
+})
+
+// SEARCH MULTIPLE KEYWORDS
+router.get('/select-meal/', (req, res) => {
+    const query = RecipeItem.apiQuery(req.query)
+    .find({
+        "$text": {
+            "$search": req.params.body
         }
     })
     .limit(5)
@@ -43,39 +60,12 @@ router.get('/:id', (req, res) => {
        console.log('error:', error)
    });
 })
-// try passing items in request body
 
 
-
-
-
-// router.get("/search", function(req, res) {  
-//     RecipeItem.find({})
-//         .then((recipeData) => {
-//             console.log('Data:', recipeData);
-//             res.json({recipeData});
-//         })
-//         .catch ((error) => {
-//             console.log('error:', error)
-//         });
-//   });
-//   router.post("/search", function(req, res) {  
-//     db.collection('recipeitems').find({
-//       "$text": {
-//         "$search": req.body.query
-//       }
-//     },
-
-// router.get('/name', (req, res) => {
-//     RecipeItem.findById(req.params.name)
-//    .then(recipeFound => {
-//        return res.status(200).json(recipeFound)
-//    })
-//    .catch ((error) => {
-//        console.log('error:', error)
-//    });
-// })
 
 
 
 module.exports = router;
+
+
+
