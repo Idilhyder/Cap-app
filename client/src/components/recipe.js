@@ -1,4 +1,5 @@
 import React from "react";
+import Img from 'react-image';
 
 const Recipe = (props) => {
     console.log(props.list.image)
@@ -9,8 +10,8 @@ const Recipe = (props) => {
         <>
     <ul key={item.id}>
     <h5 className="card-title">{item.name}</h5>
-    <img 
-        src={item.image.toString()}
+    <Img 
+        src={[item.image.toString(), 'https://i.kym-cdn.com/entries/icons/facebook/000/006/428/637738.jpg']}
         alt="food-photo"
     />
     <li className="card-text">{item.directions}</li>
