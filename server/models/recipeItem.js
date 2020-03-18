@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const RecipeItemSchema = new Schema({
    
     name: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId, ref: 'recipe',
         required: true
       },
     image: {
@@ -19,8 +19,9 @@ const RecipeItemSchema = new Schema({
         required: true
       },
     ingredients: {
-      type:Array, 
-      default: []
+      type: String,
+      required:true,
+      index:true
     },
     directions:{
         type: String,
@@ -57,6 +58,7 @@ const RecipeItemSchema = new Schema({
 // }
 
 RecipeItemSchema.indexes({'$**': 'text'});
+// RecipeItemSchema.indexes({ ingredients: "text"});
 RecipeItemSchema.plugin(mongooseApiQuery);
 const RecipeItem= mongoose.model('RecipeItem', RecipeItemSchema);
 // const newRecipeItem = new RecipeItem(recipeData);

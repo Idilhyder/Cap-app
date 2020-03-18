@@ -2,7 +2,7 @@ import React from "react";
 import Img from 'react-image';
 
 const Recipe = (props) => {
-    console.log(props.list.image)
+    console.log(props)
     return(
     <div className="card-body">
     {props.list.map(item=>{

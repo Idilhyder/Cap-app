@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const IngredientsSchema = new Schema({
   
     name: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId, ref: 'ingredients',
         required: true
       },
 })

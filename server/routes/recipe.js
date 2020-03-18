@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const _ = require('lodash');
 const RecipeItem = require(`../models/recipeItem`);
 
 
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 })
 
 // SEARCH ALL RECIPES WITH ONE KEY WORD
-router.get('/search/:query', (req, res) => {
+router.get('/search/:query', (req, res) => { 
     const query = RecipeItem.apiQuery(req.query)
     .find({
         "$text": {
@@ -34,21 +34,43 @@ router.get('/search/:query', (req, res) => {
 })
 
 // SEARCH MULTIPLE KEYWORDS
-router.get('/select-meal/', (req, res) => {
-    const query = RecipeItem.apiQuery(req.query)
-    .find({
-        "$text": {
-            "$search": req.params.body
-        }
-    })
-    .limit(5)
+router.get('/search/meal?', function(req, res){
+    const resultObj ={
+        search: req.params.search,
+        ingredients: {},
+        results: [],
+    }
+     RecipeItem.find({
+    $text: {$search: req.params.search}})
+    .limit(15)
     .then(recipeFound => {
         return res.status(200).json(recipeFound)
     })
     .catch ((error) => {
         console.log('error:', error)
     });
-})
+});
+
+
+
+
+
+
+// router.get('/select-meal/', (req, res) => {
+//     const query = RecipeItem.apiQuery(req.query)
+//     .find({
+//         "$text": {
+//             "$search": req.params.body
+//         }
+//     })
+//     .limit(5)
+//     .then(recipeFound => {
+//         return res.status(200).json(recipeFound)
+//     })
+//     .catch ((error) => {
+//         console.log('error:', error)
+//     });
+// })
 
 // GET ONE RECIPE
 router.get('/:id', (req, res) => {

@@ -6,94 +6,86 @@ import Recipe from './recipe';
 
 
 class Select extends Component {
-state = {
 
-    results: [],
-    pantry: []
-}
-pantry = () => {
-    console.log('get pantry called')
-  
-    axios.get(`http://localhost:5000/pantry/`)
-    .then((response)=> {
-        const data= response.data.pantryData;
-        console.log(data)
-        this.setState({ pantry: data});
-        console.log('Recipe received')
-      })
-      .catch(() => {
-        console.log('Error retrieving recipe')
-      });
-}
-select = () => {
-    console.log('select called')
-    axios.get(`http://localhost:5000/recipe/select-meal`, {
-        params: {
-            ingredients: this.state.pantry
-        }
-    })
-    .then((response)=> {
-        const data= response.data;
-        console.log(data)
-        this.setState({ results: data});
-        console.log('Recipe received')
-      })
-      .catch(() => {
-        console.log('Error retrieving recipe')
-      });
-}
-
+    state = {
+        search: [],
+        results: [],
+        ingredients:{}
+    }
     
-componentDidMount = () => {
-    this.pantry();
-    this.select();
-}
+    getRecipeItem = () => {
+        console.log('get recipe called')
+        console.log(this.state.query)
+        axios.get(`http://localhost:5000/recipe/search/meals`, {
+            params: {
+                search: this.state.search
+            }
+        })
+        .then((response)=> {
+            const data= response.data;
+            console.log(data)
+            this.setState({ingredients: data});
+            console.log('Recipe received')
+        })
+        .catch(() => {
+        console.log('Error retrieving recipe')
+        });
+    }
+    
+    
+        
+    componentDidMount = () => {
+        this.getRecipeItem();
+    }
+    
+    handleInputChange = (event) => {
+        event.preventDefault();
+        this.setState({
+        query: this.search.value,
+        })
+    }
+    
+    
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.getRecipeItem();
+    }
+    
 
-// handleInputChange = (event) => {
-//     event.preventDefault();
-//     this.setState({
-//     query: this.search.value
-//     }, () => {
-//     // if (this.state.query && this.state.query.length > 1) {
-//     //     if (this.state.query.length === 0) {
-//     //     this.getRecipeItem()
-//     //     }
-//     // } else if (!this.state.query) {
-//     // }
-//     })
-// }
 
-// handleSubmit = (event) => {
-//     event.preventDefault();
-//     this.getRecipeItem();
-// }
 
 render() {
-    console.log(this.state.results)
-    
+    console.log(this.state.ingredients)
+    console.log()
     return (
         <>
-    <div className="card-body">
-    {this.state.results.map(item=>{
+      <form 
+        onSubmit={this.handleSubmit}>
+        <input
+        placeholder="Search for..."
+        ref={input => this.search = input}
+        onChange={this.handleInputChange}
+        />
+        </form>
+    <div className="box-container">
+    {this.state.ingredients.map((d, i) => {
     return (
-        <>
-    <ul key={item.id}>
-    <h5 className="card-title">{item.name}</h5>
-    <li className="card-text">{item.directions}</li>
-    <li className="card-text">{item.cook}</li>
-    <li className="card-text">{item.prep}</li>
-    <li className="card-text">{item.readyIn}</li>
-    <li className="card-text">{item.calories}</li>
-    <li className="card-text">{item.rating}</li>
-    <li className="card-text">{item.ingredients}</li>
+    <ul key={d.id}>
+    <h5 className="card-title">{d.name}</h5>
+    <li className="card-text">{d.directions}</li>
+    <li className="card-text">{d.cook}</li>
+    <li className="card-text">{d.prep}</li>
+    <li className="card-text">{d.readyIn}</li>
+    <li className="card-text">{d.calories}</li>
+    <li className="card-text">{d.rating}</li>
+    <li className="card-text">{d.ingredients}</li>
     </ul>
-    </>
-    )
-    })} 
+        )
+    })}
     </div>
     </>
-    )
-}
+    );
+    }
 }
 
 export default Select

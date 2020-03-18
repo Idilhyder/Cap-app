@@ -45,7 +45,8 @@ class Main extends Component {
       name: this.state.name,
     }
 
-    axios({
+    axios({ 
+
       url: `http://localhost:5000/pantry`,
       method: 'POST',
       data: payload
@@ -89,10 +90,8 @@ class Main extends Component {
     <h3>Your Pantry</h3>
     <Pantry items={this.state.pantry}/>
     </div>
-
     <h1>YOUR SEARCH RESULTS</h1>
     <RecipeSearch/>
-      
       <h1>SEARCH VIA PANTRY TEST</h1>
       <Select/>
       </>
