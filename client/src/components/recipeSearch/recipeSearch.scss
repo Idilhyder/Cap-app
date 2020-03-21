@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap');
 .main__search {
     min-width: 42.75em;
     height: 2.85em;
@@ -7,4 +8,8 @@
     margin-top: 30%;
     margin: 0 auto;
     padding: 15px;
+}
+.roulette__title {
+    padding-left: 30%;
+    font-family: Ubuntu Condensed;
 }

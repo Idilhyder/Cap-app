@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Hero from "./../components/hero/hero";
-import MainCard from '../components/card/mainCard';
+import SideBar from "./../components/card/sideBar";
+
 
 
 
@@ -59,8 +60,8 @@ class Main extends Component {
     console.log(this.state.pantry)
     return (
     <>
+    <SideBar/>
     <Hero/>
-    <MainCard/>
     {/* <Pantry items={this.state.pantry}/> */}
     {/* <h1>TEST PANTRY</h1>
    

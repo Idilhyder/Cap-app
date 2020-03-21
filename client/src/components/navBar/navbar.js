@@ -7,7 +7,7 @@ function NavBar() {
     return (
       <nav className="nav">
         <div className="nav__wrapper">
-            <SmallMenu/>
+          <h4>No Food Waste</h4>
         </div>
       </nav>
     );

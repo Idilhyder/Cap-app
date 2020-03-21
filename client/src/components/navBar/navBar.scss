@@ -1,6 +1,6 @@
-
+@import url('https://fonts.googleapis.com/css?family=Unica+One&display=swap');
 .nav {
-    background-color: gray;
+    background-color: rgba(149,225,48, 0.45);
     color: white;
     display: flex;
     padding: 10px;
@@ -9,8 +9,9 @@
 
 }
 .nav__wrapper {
+    display: flex;
     width: 100%;
-    justify-content: right;
-    margin: auto;
-    flex-direction: row;
+    h4 {
+        font-family: 'Unica One';
+    }
 }

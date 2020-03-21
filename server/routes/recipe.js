@@ -24,7 +24,7 @@ router.get('/search/:query', (req, res) => {
             "$search": req.params.query
         }
     })
-    .limit(15)
+    .limit(1)
     .then(recipeFound => {
         return res.status(200).json(recipeFound)
     })

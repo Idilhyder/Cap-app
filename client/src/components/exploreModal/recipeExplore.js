@@ -16,24 +16,25 @@ return(
     onRequestClose={this.props.onRequestClose}
     appElement={document.getElementById('app')}
     >
-    <div className="card-body">
+    <div className="card">
     {this.props.list.map(item=>{
     return (
     <>
     <ul key={item.id}>
-    <h5 className="card-title">{item.name}</h5>
+    <h5 className="card__title">{item.name}</h5>
     <Img
     className='photo__container'
-    src={[item.image.toString(), 'https://i.kym-cdn.com/entries/icons/facebook/000/006/428/637738.jpg']}
+    src={[item.image.toString(), 'https://svg-clipart.com/svg/food/P9kLlld-food-not-bombs-logo-vector.svg']}
     alt="food-photo"
     />
-    <li className="card-text">{item.directions}</li>
-    <li className="card-text">{item.cook}</li>
-    <li className="card-text">{item.prep}</li>
-    <li className="card-text">{item.readyIn}</li>
-    <li className="card-text">{item.calories}</li>
-    <li className="card-text">{item.rating}</li>
-    <li className="card-text">{item.ingredients}</li>
+    <li className="card__text"><p>Ingredients:</p>{item.ingredients}</li>
+    <li className="card__text"><p>Prep Time:</p>{item.prep}</li>
+    <li className="card__text"><p>Cook Time:</p>{item.cook}</li>
+    <li className="card__text"><p>Countdown 'till Nom:</p>{item.readyIn}</li>
+    <li className="card__text"><p>Directions:</p>{item.directions}</li>
+    <li className="card__text"><p>Cals:</p>{item.calories}</li>
+    <li className="card__text"><p>Rating:</p>{item.rating}</li>
+    
     </ul>
     </>
     )

@@ -1,6 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Unica+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap');
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    ul {
+        list-style: none;
+    }
+}
+.card__title {
+    font-size: 36px;
+    font-family: Unica One;
+}
+.card__text {
+    justify-content: right;
+    font-family: Unica One;
+    p {
+        font-weight: bold;
+    }
+}
 .photo__container{
-    height: 120.75px;
-    width: 180.75px;
+    height: 250px;
+    width: 300px;
+    background-size: contain;;
+    margin-left: 35%;
+    border-radius: 10%;
+    margin-bottom: 25px;
 }
 .overlay {
     position: fixed;

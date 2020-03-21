@@ -60,11 +60,13 @@ render() {
     
     return (
         <>
+        
     <form 
         onSubmit={this.handleSubmit}>
+            <h1 className="roulette__title">Chef's Roulette</h1>
         <input 
         className="main__search"
-        placeholder="Search for..."
+        placeholder="Enter an ingredient..."
         ref={input => this.search = input}
         onChange={this.handleInputChange}
         />
