@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import Paper from './../card/mainCard';
-import KitchenIcon from '@material-ui/icons/Kitchen';
+import MenuIcon from '@material-ui/icons/Menu';
 import "./sideBar.scss";
 
 
@@ -53,7 +53,7 @@ const SideBar = ()  => {
     <div>
       {['left'].map(anchor => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}><KitchenIcon/></Button>
+          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon style={{ fontSize: 65}}/></Button>
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}

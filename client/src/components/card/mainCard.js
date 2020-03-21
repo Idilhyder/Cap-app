@@ -1,6 +1,9 @@
 import React from "react";
 import './sideBar.scss';
 import { makeStyles } from '@material-ui/core/styles';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import KitchenIcon from '@material-ui/icons/Kitchen';
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import Paper from '@material-ui/core/Paper';
 
 
@@ -11,16 +14,15 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         '& > *': {
         margin: theme.spacing(3),
-        width: theme.spacing(25),
-        height: theme.spacing(25),
+        width: theme.spacing(20),
+        height: theme.spacing(15),
     },
     },
     text: {
-    color: 'silver',
-    padding: 10,
-    fontSize: 14,
-    textAlign: 'center',
-    }
+        margin: 10,
+        fontSize: 18,
+        textAlign: 'center',
+    },
     }));
 
 const MainCard =() => {
@@ -31,19 +33,20 @@ return (
     <Paper 
     elevation={3}>
     <h3 className={classes.text}>Explore</h3>
-    <p className={classes.text}>Explore our vast library of recipes.
-        Search by cuisine, Meal type and health considerations.
-    </p>
+    <SearchOutlinedIcon 
+    style={{ fontSize: 50 }}/>
     </Paper>
     <Paper
     elevation={3}>
     <h3 className={classes.text}>Manage Your Pantry</h3>
-    <p className={classes.text}>Working together to reduce food waste by cooking with what you have to make quick yet mouth-watering meals</p>
+    <KitchenIcon 
+    style={{ fontSize: 50 }}/>
     </Paper>
     <Paper 
     elevation={3}>
     <h3 className={classes.text}>Let's Get Cooking</h3>
-    <p className={classes.text}>Mix and Match your pantry and let's get you fed now</p>
+    <RestaurantMenuIcon 
+    style={{ fontSize: 50 }}/>
     </Paper>
 </div>
 </>
