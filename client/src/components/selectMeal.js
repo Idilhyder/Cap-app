@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Recipe from './recipe';
+import Recipe from './recipeSearch/recipe';
 
 
 
@@ -8,15 +8,14 @@ import Recipe from './recipe';
 class Select extends Component {
 
     state = {
-        search: [],
-        results: [],
-        ingredients:{}
+        query: [],
+        ingredients:[]
     }
     
     getRecipeItem = () => {
         console.log('get recipe called')
         console.log(this.state.query)
-        axios.get(`http://localhost:5000/recipe/search/meals`, {
+        axios.get(`http://localhost:5000/recipe/search/meal?`, {
             params: {
                 search: this.state.search
             }
@@ -67,7 +66,18 @@ render() {
         onChange={this.handleInputChange}
         />
         </form>
-    <div className="box-container">
+        <Recipe 
+        list={this.state.ingredients} />
+    </>
+    );
+    }
+}
+
+export default Select
+
+
+
+{/* <div className="box-container">
     {this.state.ingredients.map((d, i) => {
     return (
     <ul key={d.id}>
@@ -82,13 +92,4 @@ render() {
     </ul>
         )
     })}
-    </div>
-    </>
-    );
-    }
-}
-
-export default Select
-
-
-
+    </div> */}

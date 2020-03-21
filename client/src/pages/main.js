@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import RecipeSearch from "./../components/recipeSearch1.js";
-import Pantry from "./../components/pantry";
-import Select from "./../components/selectMeal";
+import Hero from "./../components/hero/hero";
+import Pantry from "./../components/pantry/pantry";
+
 
 
 
@@ -12,8 +12,10 @@ class Main extends Component {
     this.state = {
           name: '',
           pantry: [],
-          recipe: [],
-        };
+          results: [],
+          recipes: [],
+          random: [],
+    };
   }
   getPantryItem = () => {
     axios.get(`http://localhost:5000/pantry`)
@@ -27,53 +29,40 @@ class Main extends Component {
     });
   }
 
-
-  componentDidMount = () => {
-    this.getPantryItem();
-  }
-
-  handleChange = ({ target }) => {
-    const { name, value }= target;
-    this.setState({
-      [name]:value });
-  }
-
-  submit = (event) => {
-    event.preventDefault();
-
-    const payload = {
-      name: this.state.name,
-    }
-
-    axios({ 
-
-      url: `http://localhost:5000/pantry`,
-      method: 'POST',
-      data: payload
-    })
-    .then(()=> {
-      console.log('Data sent');
-      this.resetUserInputs();
-      this.getPantryItem();
-    })
-    .catch(()=> {
-      console.log('Data not sent');
-    });
-  };
+  // submit = (event) => {
+  //   event.preventDefault();
+  //   const payload = {
+  //     name: this.state.name,
+  //   }
+  //   axios({ 
+  //     url: `http://localhost:5000/pantry`,
+  //     method: 'POST',
+  //     data: payload
+  //   })
+  //   .then(()=> {
+  //     console.log('Data sent');
+  //     this.resetUserInputs();
+  //     this.getPantryItem();
+  //   })
+  //   .catch(()=> {
+  //     console.log('Data not sent');
+  //   });
+  // };
   
-  resetUserInputs = () => {
-    this.setState({
-      name: '',
-    });
-  };
-
-
+  // resetUserInputs = () => {
+  //   this.setState({
+  //     name: '',
+  //   });
+  // };
 
   render() {
     console.log(this.state.pantry)
     return (
     <>
-    <h1>TEST PANTRY</h1>
+    <Hero/>
+    <Pantry items={this.state.pantry}/>
+
+    {/* <h1>TEST PANTRY</h1>
     <form onSubmit={this.submit}>
     <div className="form-input">
         <input
@@ -93,7 +82,7 @@ class Main extends Component {
     <h1>YOUR SEARCH RESULTS</h1>
     <RecipeSearch/>
       <h1>SEARCH VIA PANTRY TEST</h1>
-      <Select/>
+      <Select/> */}
       </>
     );
 }

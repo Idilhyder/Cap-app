@@ -44,7 +44,6 @@ router.get('/:id', (req, res) => {
 // CREATE ONE PANTRY ITEM
 router.post('/', (req, res) => {
     const pantryData = req.body;
-    
     const newPantryItem = new PantryItem(pantryData);
 
     newPantryItem.save((error)=> {

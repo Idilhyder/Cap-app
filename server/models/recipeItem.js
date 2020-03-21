@@ -7,8 +7,8 @@ const Schema = mongoose.Schema;
 const RecipeItemSchema = new Schema({
    
     name: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'recipe',
-        required: true
+      type: String,
+      required: true
       },
     image: {
       type: String,

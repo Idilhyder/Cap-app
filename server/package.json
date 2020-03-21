@@ -29,7 +29,8 @@
     "case-sensitive-paths-webpack-plugin": "^2.3.0"
   },
   "pkg": {
-    "options": ["experimental-modules"]
-}
-
+    "options": [
+      "experimental-modules"
+    ]
+  }
 }

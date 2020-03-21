@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const PantryItemSchema = new Schema({
   
     name: {
-      type: Schema.Types.ObjectId,
-      ref: 'pantry'
+      type: String,
+      required: true
       },
 })
 PantryItemSchema.indexes({'$**': 'text'});

@@ -1,0 +1,82 @@
+import React, { Component } from 'react'
+import axios from 'axios';
+import './recipeSearch.scss';
+import RecipeExploreModal from '../exploreModal/recipeExplore';
+
+class RecipeSearch extends Component {
+state = {
+    query: '',
+    results: [],
+    showModal: false
+}
+
+getRecipeItem = () => {
+    console.log('get recipe called')
+    console.log(this.state.query)
+
+    axios.get(`http://localhost:5000/recipe/search/${this.state.query}`)
+    .then((response)=> {
+        const data= response.data;
+        console.log(data)
+        this.setState({ results: data});
+        this.handleOpenModal();
+        
+        console.log('Recipe received')
+        
+      })
+      .catch(() => {
+        console.log('Error retrieving recipe')
+      });
+}
+
+
+    
+componentDidMount = () => {
+    this.getRecipeItem();
+}
+
+handleInputChange = (event) => {
+    event.preventDefault();
+    this.setState({
+    query: this.search.value,
+    })
+}
+
+  handleOpenModal = () => {
+    this.setState({showModal:true});
+    console.log("modal opened")
+  }
+  handleCloseModal = () => {
+      this.setState({showModal:false})
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.getRecipeItem();
+}
+
+render() {
+    console.log(this.state.results)
+    
+    return (
+        <>
+    <form 
+        onSubmit={this.handleSubmit}>
+        <input 
+        className="main__search"
+        placeholder="Search for..."
+        ref={input => this.search = input}
+        onChange={this.handleInputChange}
+        />
+    </form>
+    <RecipeExploreModal 
+    list={this.state.results}
+    isOpen={this.state.showModal}
+    onRequestClose={this.handleCloseModal}
+    />
+    </>
+    )
+}
+}
+
+export default RecipeSearch

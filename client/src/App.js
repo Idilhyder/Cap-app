@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from "react-dom";
 import Main from './pages/main';
-import RecipeSearch from './components/recipeSearch1';
-import {BrowserRouter, Switch, Route, Link, useParams} from "react-router-dom";
-import Pantry from './components/pantry';
+import {BrowserRouter, Switch, Route } from "react-router-dom";
+import NavBar from "./components/navBar/navbar";
+import SelectMeals from "./components/selectMeal";
+import About from "./components/about/about"
 
 
 
@@ -13,19 +13,20 @@ function App ()  {
   return (
     <>
     <BrowserRouter>
+    <NavBar/>
       <Switch>
         <Route 
           exact path="/" 
           component ={Main}/>
         <Route 
-          exact path="/pantry"
-          component ={Pantry}/>
-        <Route 
           exact path="/:id"
           component ={Main}/>
         <Route 
-          exact path="/:query"
-          component ={RecipeSearch}/>
+          exact path="/selectMeals"
+          component ={SelectMeals}/>
+          <Route 
+          exact path="/about"
+          component ={About}/>
     </Switch>
     </BrowserRouter>
     </>
