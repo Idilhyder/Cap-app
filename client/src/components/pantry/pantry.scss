@@ -1,3 +1,27 @@
-.card {
-    
+.photo__container{
+    height: 120.75px;
+    width: 180.75px;
+}
+.overlay {
+    position: fixed;
+    top: 40;
+    left: 40;
+    right: 40;
+    bottom: 40;
+    background: rgba(0, 0, 0, 0.6);
+}
+.modal__explore {
+    position: absolute;
+    max-width: 100%;
+    z-index: 1;
+    top: 70px;
+    left: 30px;
+    right: 30px;
+    bottom: 40px;
+    background-color: white;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+}
+.modal__explore::-webkit-scrollbar {
+    display: none;
 }

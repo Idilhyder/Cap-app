@@ -1,59 +1,66 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { Component } from 'react';
+import axios from 'axios';
+import PantryModal from "./pantryModal";
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  title: {
-    fontSize: 14,
-  },
-});
+class Pantry extends Component {
+  constructor () {
+    super ();
+    this.state = {
+      name: '',
+      pantry: [],
+      results: [],
+      showModal: false
+    }
+  }
+  getPantryItem = () => {
+    axios.get(`http://localhost:5000/pantry`)
+    .then((response)=> {
+      const data= response.data.pantryData;
+      this.setState({ pantry: data});
+      console.log('Pantry received')
+    })
+    .catch(() => {
+      console.log('Error retrieving pantry')
+    });
+  }
 
-const Pantry =(props) => {
-    console.log(props)
-  const classes = useStyles();
-  return (
-    <Card 
-    className={classes.root}>
-    {props.items.map(item =>{
-        return (
-            <>
-            <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {props.item.name}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Edit</Button>
-      </CardActions>
-      </>
-        )
-    })}
-      
-    </Card>
-  );
+  submit = (event) => {
+    event.preventDefault();
+    const payload = {
+      name: this.state.name,
+    }
+    axios({ 
+      url: `http://localhost:5000/pantry`,
+      method: 'POST',
+      data: payload
+    })
+    .then(()=> {
+      console.log('Data sent');
+      this.resetUserInputs();
+      this.getPantryItem();
+    })
+    .catch(()=> {
+      console.log('Data not sent');
+    });
+  };
+  componentDidMount = () => {
+    this.getPantryItem();
 }
+  resetUserInputs = () => {
+    this.setState({
+      name: '',
+    });
+  };
 
-// const Pantry = props => {
-// console.log(props.item)
-//     return(
-//     <div className="card">    
-//     {props.items.map(item=>{
-//     return (
-//         <>
-//     <div key={item.id}/>
-//     <p className="card-title">{item.name}</p>
-//     </>
-//     )
-//     })} 
-//     </div>
-// );
-// }
-
+  render() {
+    return (
+      <>
+      {/* <PantryModal
+      isOpen={this.state.isShowing}
+      onRequestClose={this.handleCloseModal}
+      items={this.state.pantry}/> */}
+      </>
+    )
+  }
+}
 export default Pantry;

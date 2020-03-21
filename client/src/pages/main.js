@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Hero from "./../components/hero/hero";
-import Pantry from "./../components/pantry/pantry";
+import MainCard from '../components/card/mainCard';
 
 
 
@@ -29,52 +29,41 @@ class Main extends Component {
     });
   }
 
-  // submit = (event) => {
-  //   event.preventDefault();
-  //   const payload = {
-  //     name: this.state.name,
-  //   }
-  //   axios({ 
-  //     url: `http://localhost:5000/pantry`,
-  //     method: 'POST',
-  //     data: payload
-  //   })
-  //   .then(()=> {
-  //     console.log('Data sent');
-  //     this.resetUserInputs();
-  //     this.getPantryItem();
-  //   })
-  //   .catch(()=> {
-  //     console.log('Data not sent');
-  //   });
-  // };
+  submit = (event) => {
+    event.preventDefault();
+    const payload = {
+      name: this.state.name,
+    }
+    axios({ 
+      url: `http://localhost:5000/pantry`,
+      method: 'POST',
+      data: payload
+    })
+    .then(()=> {
+      console.log('Data sent');
+      this.resetUserInputs();
+      this.getPantryItem();
+    })
+    .catch(()=> {
+      console.log('Data not sent');
+    });
+  };
   
-  // resetUserInputs = () => {
-  //   this.setState({
-  //     name: '',
-  //   });
-  // };
+  resetUserInputs = () => {
+    this.setState({
+      name: '',
+    });
+  };
 
   render() {
     console.log(this.state.pantry)
     return (
     <>
     <Hero/>
-    <Pantry items={this.state.pantry}/>
-
+    <MainCard/>
+    {/* <Pantry items={this.state.pantry}/> */}
     {/* <h1>TEST PANTRY</h1>
-    <form onSubmit={this.submit}>
-    <div className="form-input">
-        <input
-        type='text'
-        name='name'
-        placeholder="Enter item"
-        value={this.state.name}
-        onChange={this.handleChange}
-        />
-        </div>
-        <button>Submit</button>
-    </form>
+   
     <div className="pantry">
     <h3>Your Pantry</h3>
     <Pantry items={this.state.pantry}/>

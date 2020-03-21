@@ -3,7 +3,7 @@ import Main from './pages/main';
 import {BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/navBar/navbar";
 import SelectMeals from "./components/selectMeal";
-import About from "./components/about/about"
+import About from "./pages/about";
 
 
 
@@ -19,14 +19,11 @@ function App ()  {
           exact path="/" 
           component ={Main}/>
         <Route 
-          exact path="/:id"
-          component ={Main}/>
-        <Route 
           exact path="/selectMeals"
           component ={SelectMeals}/>
           <Route 
           exact path="/about"
-          component ={About}/>
+          component={About}/>
     </Switch>
     </BrowserRouter>
     </>
