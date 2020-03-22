@@ -6,7 +6,7 @@ const portalRoot = document.getElementById('portal');
 
 class Portal extends Component {
     constructor() {
-        super ();
+        super();
         this.el = document.createElement('div');
     }
     componentDidMount =() => {
