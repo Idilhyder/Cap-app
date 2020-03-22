@@ -13,7 +13,7 @@ const  Hero=()=> {
         <h2>Select and update items from your pantry to find your next delicious meal.</h2>
       </div>
       <button 
-      className="hero__button">START COOKING</button>
+        className="hero__button">START COOKING</button>
         <div className="hero__banner">
         <SideBar/>
       </div>

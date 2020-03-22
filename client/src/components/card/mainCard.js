@@ -1,10 +1,14 @@
-import React from "react";
+import React from 'react';
 import './sideBar.scss';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import Paper from '@material-ui/core/Paper';
+import Portal from './../useModalHooks/useModal';
+import PantryModal from './../pantry/pantryModal';
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,8 +29,9 @@ const useStyles = makeStyles(theme => ({
     },
     }));
 
-const MainCard =() => {
-const classes = useStyles();
+const MainCard = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const classes = useStyles();
 return (
 <>
 <div className={classes.root}>
@@ -39,8 +44,12 @@ return (
     <Paper
     elevation={3}>
     <h3 className={classes.text}>Manage Your Pantry</h3>
-    <KitchenIcon 
+    <KitchenIcon
     style={{ fontSize: 50 }}/>
+    <button onClick={() => setIsOpen(true)}> test me </button>
+    <Portal
+        isOpen={isOpen}>
+    </Portal>
     </Paper>
     <Paper 
     elevation={3}>
@@ -52,4 +61,5 @@ return (
 </>
 );
 }
+
 export default MainCard;
