@@ -42,9 +42,12 @@ const SideBar = ()  => {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role="presentation"
-      // make a handle function here
+      // onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
     >
-    <MainCard/>
+    <MainCard
+    onClick={this.toggleDrawer(anchor, false)}
+    />
     </div>
   );
 
