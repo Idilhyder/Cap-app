@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
-import Paper from './../card/mainCard';
+import MainCard from './../card/mainCard';
 import MenuIcon from '@material-ui/icons/Menu';
 import "./sideBar.scss";
 
@@ -42,11 +42,9 @@ const SideBar = ()  => {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
       // make a handle function here
-      onKeyDown={toggleDrawer(anchor, false)}
     >
-    <Paper/>
+    <MainCard/>
     </div>
   );
 

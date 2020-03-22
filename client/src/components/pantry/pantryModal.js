@@ -4,12 +4,11 @@ import "./pantry.scss";
 import axios from 'axios';
 
 class PantryModal extends Component {
-    constructor () {
-        super ();
+    constructor() {
+        super();
         this.state = {
         name: '',
         pantry: [],
-        showModal: false
     }
     }
     getPantryItem = () => {
@@ -50,7 +49,7 @@ class PantryModal extends Component {
 
     resetUserInputs = () => {
     this.setState({
-        name: '',
+        name: ''
     });
     };
     render() {
@@ -58,7 +57,7 @@ class PantryModal extends Component {
         return (
             <>
     <ReactModal
-        isOpen={this.state.showModal}
+        isOpen={this.props.isOpen}
         className="modal__explore overlay"
         onRequestClose={this.state.onRequestClose}
         appElement={document.getElementById('portal')}
