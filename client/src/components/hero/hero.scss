@@ -6,7 +6,8 @@
     flex-direction: column;
     height: 100vw;
     background-size: cover;
-    opacity: 0.75;
+    opacity: 0.85;
+    background-image: url('./../../test/katie-smith-uQs1802D0CQ-unsplash.jpg');
     background-repeat: no-repeat;
     width: 100vw;
 }
@@ -27,6 +28,10 @@
         margin: 0 auto;
     }
 }
+.logo {
+    width: 400px;
+    background-image: url('./../../test/foodlogo.png');
+}
 .hero__description {
     font-family: Ubuntu Condensed;
     display: block;
@@ -44,6 +49,8 @@
 .hero__button {
     font-family: Unica One;
     width: 14rem;
+    border: 1px solid #e0dcd9;
+    color: #b9d76f;
     height: 3rem;
     margin: 40px 0px 0px 170px;
     border-radius: 5%;
