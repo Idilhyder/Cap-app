@@ -4,14 +4,14 @@ import "./pantry.scss";
 import axios from 'axios';
 
 class PantryModal extends Component {
-    constructor() {
+    constructor () {
         super();
         this.state = {
         name: '',
-        pantry: [],
-    }
-    }
-    getPantryItem = () => {
+        pantry: []
+    };
+}
+getPantryItem = () => {
     axios.get(`http://localhost:5000/pantry`)
     .then((response)=> {
         const data= response.data.pantryData;
@@ -22,8 +22,7 @@ class PantryModal extends Component {
         console.log('Error retrieving pantry')
     });
     }
-
-    submit = (event) => {
+submit = (event) => {
     event.preventDefault();
     const payload = {
         name: this.state.name,
@@ -42,51 +41,43 @@ class PantryModal extends Component {
         console.log('Data not sent');
     });
     };
-    componentDidMount = () => {
-    this.getPantryItem();
-}
+    
 
-
-    resetUserInputs = () => {
-    this.setState({
-        name: ''
-    });
+componentDidMount = () => {
+        this.getPantryItem();
     };
-    render() {
-        console.log(this.state)
-        return (
-            <>
+
+
+render() {
+    return (
     <ReactModal
         isOpen={this.props.isOpen}
         className="modal__explore overlay"
-        onRequestClose={this.state.onRequestClose}
-        appElement={document.getElementById('portal')}
-    >
+        onRequestClose={this.props.onRequestClose}
+        appElement={document.getElementById('app')}>
     <form onSubmit={this.submit}>
     <div className="form-input">
-        <input
+    <input
         type='text'
         name='name'
         placeholder="Enter item"
         value={this.state.name}
-        onChange={this.handleChange}
+        onChange={this.handleInputChange}
         />
-        </div>
+     </div>
         <button>Submit</button>
     </form>
     <div className="card-body">
         {this.state.pantry.map(item =>{
-        return (
-        <>
+    return (
     <div key={item.id}>
     <h5 className="card-title">{item.name}</h5>
     </div>
-        </>
         )
         })} 
     </div>
-        </ReactModal>
-        </>
+        <button onClick={this.props.onClose}>Close</button>
+    </ReactModal>
         )
     }
 }

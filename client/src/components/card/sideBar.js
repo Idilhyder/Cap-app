@@ -1,73 +1,78 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import MainCard from './../card/mainCard';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import "./sideBar.scss";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MainCard from './mainCard';
 
+const drawerWidth = 240;
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
   },
-  fullList: {
-    width: 'auto',
-    overflow: 'none',
-    height: '100vh',
-}
-});
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+}));
 
-
-const SideBar = ()  => {
+function SideBar() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    left: false
-  });
-  
-  
-  const toggleDrawer = (anchor, open) => event => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
-    setState({ ...state, [anchor]: open });
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
-  const list = anchor => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-    <MainCard
-    onClick={this.toggleDrawer(anchor, false)}
-    />
-    </div>
-  );
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <div>
-      {['left'].map(anchor => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon style={{ fontSize: 65}}/></Button>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))}
+    <div className={classes.root}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
+            >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </div>
+        <MainCard/>
+      </Drawer>
     </div>
   );
 }
-
 export default SideBar;

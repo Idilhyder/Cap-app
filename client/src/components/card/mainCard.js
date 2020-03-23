@@ -8,6 +8,7 @@ import KitchenIcon from '@material-ui/icons/Kitchen';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import Paper from '@material-ui/core/Paper';
 import Portal from './../useModalHooks/useModal';
+import PantryModal from './../pantry/pantryModal'
 
 
 
@@ -29,10 +30,11 @@ const useStyles = makeStyles(theme => ({
     },
     }));
 
-const MainCard = () => {
+const MainCard = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const classes = useStyles();
-    const [anchor, setAnchor] = useState(false)
+
+    
 return (
 <>
 <div className={classes.root}>
@@ -44,11 +46,14 @@ return (
     </Paper>
     <Paper
     onClick={() => setIsOpen(true)}
-    onRequestClose={() => setIsOpen(false)}
     elevation={3}>
     <h3 className={classes.text}>Manage Your Pantry</h3>
     <KitchenIcon style={{ fontSize: 50 }}/>
-    <Portal isOpen={isOpen}/>
+    <PantryModal
+        isClosed={() => setIsOpen(false)}
+        onRequestClose={() => setIsOpen(false)}
+        isOpen={isOpen}
+        />
     </Paper>
     <Paper 
     elevation={3}>
