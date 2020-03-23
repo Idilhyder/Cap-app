@@ -1,3 +1,4 @@
+  
 import React from 'react';
 import './sideBar.scss';
 import { Link } from 'react-router-dom';
@@ -8,8 +9,8 @@ import KitchenIcon from '@material-ui/icons/Kitchen';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import Paper from '@material-ui/core/Paper';
 import Portal from './../useModalHooks/useModal';
-import PantryModal from './../pantry/pantryModal'
-
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import PantryModal from './../pantry/pantryModal';
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,35 +32,34 @@ const useStyles = makeStyles(theme => ({
     }));
 
 const MainCard = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
+    console.log(props)
     const classes = useStyles();
 
-    
 return (
 <>
 <div className={classes.root}>
     <Paper 
-    elevation={3}>
+        elevation={3}>
     <h3 className={classes.text}>Explore</h3>
     <SearchOutlinedIcon 
-    style={{ fontSize: 50 }}/>
+        style={{ fontSize: 50 }}/>
     </Paper>
     <Paper
-    onClick={() => setIsOpen(true)}
-    elevation={3}>
+        onClick={props.onHandleOpen}
+        elevation={3}>
     <h3 className={classes.text}>Manage Your Pantry</h3>
-    <KitchenIcon style={{ fontSize: 50 }}/>
+    <KitchenIcon
+        style={{ fontSize: 50 }}/>
     <PantryModal
-        isClosed={() => setIsOpen(false)}
-        onRequestClose={() => setIsOpen(false)}
-        isOpen={isOpen}
-        />
+        isOpen={props.isOpen}
+        >
+    </PantryModal>
     </Paper>
     <Paper 
-    elevation={3}>
+        elevation={3}>
     <h3 className={classes.text}>Let's Get Cooking</h3>
     <RestaurantMenuIcon 
-    style={{ fontSize: 50 }}/>
+        style={{ fontSize: 50 }}/>
     </Paper>
 </div>
 </>

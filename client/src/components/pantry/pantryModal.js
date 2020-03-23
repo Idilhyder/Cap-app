@@ -4,14 +4,14 @@ import "./pantry.scss";
 import axios from 'axios';
 
 class PantryModal extends Component {
-    constructor () {
+    constructor() {
         super();
         this.state = {
         name: '',
-        pantry: []
-    };
-}
-getPantryItem = () => {
+        pantry: [],
+    }
+    }
+    getPantryItem = () => {
     axios.get(`http://localhost:5000/pantry`)
     .then((response)=> {
         const data= response.data.pantryData;
@@ -22,7 +22,13 @@ getPantryItem = () => {
         console.log('Error retrieving pantry')
     });
     }
-submit = (event) => {
+    handleInputChange = (event) => {
+    event.preventDefault();
+    this.setState({
+        [event.target.name]: event.target.value 
+    })
+    }
+    submit = (event) => {
     event.preventDefault();
     const payload = {
         name: this.state.name,
@@ -41,45 +47,61 @@ submit = (event) => {
         console.log('Data not sent');
     });
     };
-    
+    componentDidMount = () => {
+    this.getPantryItem();
+    }
 
-componentDidMount = () => {
-        this.getPantryItem();
+    resetUserInputs = () => {
+    this.setState({
+        name: ''
+    });
     };
-
-
-render() {
-    return (
+    render() {
+        console.log(this.props)
+        return (
+            <>
     <ReactModal
         isOpen={this.props.isOpen}
+        close={this.props.close}
         className="modal__explore overlay"
-        onRequestClose={this.props.onRequestClose}
-        appElement={document.getElementById('app')}>
-    <form onSubmit={this.submit}>
+        appElement={document.getElementById('portal')}
+
+    >
+    <form onSubmit={this.submit}
+    id="modal__form"  method="post"
+    className="form__wrapper"
+    >
     <div className="form-input">
-    <input
+    <label
+    className="modal__label"
+    for="name"> Input your Ingredients</label>
+        <input
         type='text'
         name='name'
         placeholder="Enter item"
         value={this.state.name}
         onChange={this.handleInputChange}
         />
-     </div>
+        </div>
         <button>Submit</button>
+        <button onClick={() => this.props.close}>Close</button>
     </form>
     <div className="card-body">
         {this.state.pantry.map(item =>{
-    return (
+        return (
+        <>
     <div key={item.id}>
     <h5 className="card-title">{item.name}</h5>
     </div>
+        </>
         )
         })} 
     </div>
-        <button onClick={this.props.onClose}>Close</button>
-    </ReactModal>
+        </ReactModal>
+        </>
         )
     }
 }
 
 export default PantryModal;
+

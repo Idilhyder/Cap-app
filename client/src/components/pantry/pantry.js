@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PantryModal from "./pantryModal";
+import Recipe from './../recipeSearch/recipe';
+import pantry from './pantry.scss';
 
 class Pantry extends Component {
 constructor () {
 super ();
 this.state = {
-    name: '',
     pantry: [],
-    showModal: false
     }
 }
 getPantryItem = () => {
@@ -22,54 +21,29 @@ axios.get(`http://localhost:5000/pantry`)
     console.log('Error retrieving pantry')
 });
 }
-handleInputChange = (event) => {
-    event.preventDefault();
-    this.setState({
-        [event.target.name]: event.target.value 
-    })
+componentDidMount=()=>{
+    this.getPantryItem();
 }
-resetUserInputs = () => {
-    this.setState({
-        name: '',
-    });
-};
-
-submit = (event) => {
-    event.preventDefault();
-    const payload = {
-        name: this.state.name,
-    }
-    axios({ 
-        url: `http://localhost:5000/pantry`,
-        method: 'POST',
-        data: payload
-    })
-    .then(()=> {
-        console.log('Data sent');
-        this.resetUserInputs();
-        this.getPantryItem();
-    })
-    .catch(()=> {
-        console.log('Data not sent');
-    });
-    };
-
-    handleOpenModal = () => {
-        this.setState({showModal:true});
-        console.log("modal opened")
-    }
-    handleCloseModal = () => {
-        this.setState({showModal:false})
-    }
 
 render() {
 return (
-    <PantryModal 
-    list={this.state.pantry}
-    isOpen={this.handleOpenModal}
-    onRequestClose={this.handleCloseModal}
-    onClose={this.handleCloseModal}
-    />
+    <>
+    <div className="pantry__recipe">
+    <h2>Your Current Pantry</h2>
+    {this.state.pantry.map(item =>{
+    return (
+    <>
+    <div key={item.id}>
+    <div className="pantry__recipe__box">
+        
+    <h5 className="recipe__title">{item.name}</h5>
+    </div>
+    </div>
+        </>
+        )
+        })}
+        </div> 
+    </>
    );
     }
 }

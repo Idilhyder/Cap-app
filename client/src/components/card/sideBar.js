@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -30,18 +31,30 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SideBar() {
+const SideBar =(props) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+  
+
+  const handleOpen = () => {
+    setIsOpen((true));
+  };
+  const handleClose = () => {
+    setIsOpen((false));
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+  
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
 
   return (
     <div className={classes.root}>
@@ -70,7 +83,11 @@ function SideBar() {
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
-        <MainCard/>
+        <MainCard 
+        isOpen={isOpen}
+        onHandleOpen={handleOpen}
+        close={handleClose}
+        />
       </Drawer>
     </div>
   );

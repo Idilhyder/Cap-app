@@ -1,6 +1,7 @@
 import "./hero.scss";
 import RecipeSearch from "./../recipeSearch/recipeSearch1";
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -11,10 +12,9 @@ const  Hero=()=> {
         <div className="hero__description">
         <h1>What's in your Pantry?</h1>
         <h2>Select and update items from your pantry to find your next delicious meal.</h2>
-      </div>
-      <button 
-        className="hero__button">START COOKING</button>
-        <div className="hero__banner">
+      <Link to={`/selectMeals`} >
+      <button className="hero__button">START COOKING</button>
+        </Link>
       </div>
       <div className="hero__wrapper">
       <RecipeSearch/>

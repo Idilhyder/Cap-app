@@ -1,0 +1,21 @@
+.results__wrapper{
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+    h1 {
+        font-family: Ubuntu Condensed;
+        padding-left: 15%;
+    }
+}
+.results__search {
+    min-width: 12.75em;
+    height: 2.85em;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #afafaf;
+    margin: 5%;
+    padding: 15px;
+}
+.results__form{
+    width: 50%;
+}

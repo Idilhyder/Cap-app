@@ -4,85 +4,85 @@ import Hero from "./../components/hero/hero";
 import SideBar from "./../components/card/sideBar";
 import PantryModal from '../components/pantry/pantryModal';
 import Pantry from './../components/pantry/pantry';
+import MainCard from './../components/card/mainCard';
+import Paper from '@material-ui/core/Paper';
 
 
 class Main extends Component {
   constructor () {
     super();
     this.state = {
-          // name: '',
-          // pantry: [],
-          // results: [],
-          // recipes: [],
-          // random: [],
+          name: '',
+          pantry: [],
           showModal: false
     };
   }
-  // getPantryItem = () => {
-  //   axios.get(`http://localhost:5000/pantry`)
-  //   .then((response)=> {
-  //     const data= response.data.pantryData;
-  //     this.setState({ pantry: data});
-  //     console.log('Pantry received')
-  //   })
-  //   .catch(() => {
-  //     console.log('Error retrieving pantry')
-  //   });
-  // }
+  getPantryItem = () => {
+    axios.get(`http://localhost:5000/pantry`)
+    .then((response)=> {
+      const data= response.data.pantryData;
+      this.setState({ pantry: data});
+      console.log('Pantry received')
+    })
+    .catch(() => {
+      console.log('Error retrieving pantry')
+    });
+  }
 
-  // submit = (event) => {
-  //   event.preventDefault();
-  //   const payload = {
-  //     name: this.state.name,
-  //   }
-  //   axios({ 
-  //     url: `http://localhost:5000/pantry`,
-  //     method: 'POST',
-  //     data: payload
-  //   })
-  //   .then(()=> {
-  //     console.log('Data sent');
-  //     this.resetUserInputs();
-  //     this.getPantryItem();
-  //   })
-  //   .catch(()=> {
-  //     console.log('Data not sent');
-  //   });
-  // };
+  onSubmit = (event) => {
+    event.preventDefault();
+    const payload = {
+      name: this.state.name,
+    }
+    axios({ 
+      url: `http://localhost:5000/pantry`,
+      method: 'POST',
+      data: payload
+    })
+    .then(()=> {
+      console.log('Data sent');
+      this.resetUserInputs();
+      this.getPantryItem();
+    })
+    .catch(()=> {
+      console.log('Data not sent');
+    });
+  };
 
-  handleOpenModal = () => {
+  openModal = () => {
     this.setState({showModal:true});
     console.log("modal opened")
   }
-  handleCloseModal = () => {
+  closeModal = () => {
       this.setState({showModal:false})
   }
-//   HandleChange(event) {
-//     this.setState({ 
-//       [event.target.name]: event.target.value 
-//     });
-// }
-  // resetUserInputs = () => {
-  //   this.setState({
-  //     name: '',
-  //   });
-  // };
+
+
+  resetUserInputs = () => {
+    this.setState({
+      name: '',
+    });
+  };
+
+  handleSidebarCardClick=()=> {
+    this.openModal()
+  }
+ 
   
-  // componentDidMount = () => {
-  // this.getPantryItem();
-  // }
+  componentDidMount = () => {
+  this.getPantryItem();
+  }
 
   render() {
     console.log(this.state.pantry)
     return (
     <>
-    <SideBar/>
+    <SideBar
+    isOpen={this.openModal}
+    onRequestClose={this.closeModal}
+    
+    />
     <Hero/>
-    {/* <PantryModal
-    isOpen={this.state.isShowing}
-    onClose={this.handleCloseModal}
-    onRequestClose={this.handleCloseModal}
-    items={this.state.pantry}/> */}
       </>
     );
 }
