@@ -40,9 +40,13 @@ const SideBar =(props) => {
   
 
   const handleOpen = () => {
-    setIsOpen((true));
+    console.log('hit handleOpen')
+    if (!isOpen) {
+      setIsOpen((true));
+    }
   };
   const handleClose = () => {
+    console.log('hit close')
     setIsOpen((false));
   };
 
@@ -54,6 +58,8 @@ const SideBar =(props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  console.log('isOpen', isOpen)
 
 
   return (

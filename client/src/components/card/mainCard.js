@@ -52,6 +52,7 @@ return (
         style={{ fontSize: 50 }}/>
     <PantryModal
         isOpen={props.isOpen}
+        close={props.close}
         >
     </PantryModal>
     </Paper>
