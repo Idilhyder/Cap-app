@@ -62,7 +62,7 @@ class PantryModal extends Component {
             <>
     <ReactModal
         isOpen={this.props.isOpen}
-        close={this.props.close}
+        onRequestClose={this.props.close}
         className="modal__explore overlay"
         appElement={document.getElementById('portal')}
 
@@ -84,7 +84,7 @@ class PantryModal extends Component {
         />
         </div>
         <button>Submit</button>
-        <button onClick={() => this.props.close}>Close</button>
+        <button onClick={this.props.close}>Close</button>
     </form>
     <div className="card-body">
         {this.state.pantry.map(item =>{
