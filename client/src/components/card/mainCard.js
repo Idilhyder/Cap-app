@@ -56,6 +56,7 @@ return (
         style={{ fontSize: 50 }}/>
     <Portal
         isOpen={props.isOpen}
+        close={props.close}
         >
     </Portal>
     </Paper>
