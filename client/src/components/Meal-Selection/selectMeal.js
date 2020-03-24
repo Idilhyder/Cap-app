@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Recipe from '../recipeSearch/recipe';
 import SideBar from '../card/sideBar';
 import "./../Meal-Selection/select.scss";
-import SearchForm from './../Meal-Selection/form-select';
-import RecipeExploreModal from "./../exploreModal/recipeExplore";
 import Img from 'react-image';
-import "./../recipeSearch/recipe.scss";
-import Pantry from "./../pantry/pantry";
-import PantryModal from './../pantry/pantryModal';
-import Portal from './../useModalHooks/useModal'
+
 
 
 
@@ -23,11 +17,11 @@ class Select extends Component {
     
     getSearchRecipeItem = () => {
         console.log('get recipe called')
-        axios.get(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${this.state.query}`, {
+        axios.get(`http://localhost:5000/recipe/search/${this.state.query}`, {
 
         })
         .then((response)=> {
-            const data= response.data.meals;
+            const data= response.data;
             console.log(data)
             this.setState({ingredients: data});
             console.log('Recipe received')
@@ -39,19 +33,19 @@ class Select extends Component {
     
     
         
-    componentDidUpdate = () => {
+    componentDidMount = () => {
         this.getSearchRecipeItem();
     }
     
     handleInputChange = (event) => {
         event.preventDefault();
         this.setState({
-            isOpen:false
+            query: this.search.value
         })
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        this.getRecipeItem();
+        this.getSearchRecipeItem();
     }
     
 
@@ -69,27 +63,47 @@ render() {
             <input 
             className="results__search"
             placeholder="Enter an ingredient..."
-            value={this.query}
+            ref={input => this.search = input}
             onChange={this.handleInputChange}/>
         </form>
+        </div>
     <div className="recipe">
-    {this.state.ingredients.map(item=>{
+    {this.state.ingredients.map(item=> {
     return (
-    <>
+        <>
     <ul key={item.id}>
-    <h5 className="recipe__title">{item.strMeal}</h5>
+    <h5 className="recipe__title">{item.name}</h5>
     <Img
     className='recipe__img'
-    src={[item.strThumb, 'https://svg-clipart.com/svg/food/P9kLlld-food-not-bombs-logo-vector.svg']}
+    src={[item.image.toString(), 'https://svg-clipart.com/svg/food/P9kLlld-food-not-bombs-logo-vector.svg']}
     alt="food-photo"
     />
+    <div className='recipe__box'>
+    <div className='recipe_text'>
+        <h5>Ingredients</h5>
+    <div className="recipe_text">{item.ingredients}</div>
+        <h5>Directions</h5>
+    <div className="recipe_text">{item.directions}</div>
+    <div className='small__text'>
+        <h5>Cook Time</h5>
+    <div className="recipe_text">{item.cook}</div>
+        <h5>Prep Time</h5>
+    <div className="recipe_text">{item.prep}</div>
+        <h5>Ready In</h5>
+    <div className="recipe_text">{item.readyIn}</div>
+        <h5>Calories</h5>
+    <div className="recipe_text">{item.calories}</div>
+        <h5>Rating</h5>
+    <div className="recipe_text">{item.rating}</div>
+    </div>
+    </div>
+    </div>
     </ul>
     </>
     )
     })} 
     </div>
-    </div>
-        </>
+    </>
     );
     }
 }

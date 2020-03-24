@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import "./recipeExplore.scss";
-import "./../recipeSearch/recipe.scss";
 import Img from 'react-image';
 
 

@@ -84,12 +84,11 @@ class PantryModal extends Component {
         
     </div>
     </form>
-   
-    
         {this.state.pantry.map(item =>{
         return (
         <>
-    <div key={item.id}>
+    <div className="pantry__container"
+    key={item.id}>
         <div className='pantry__card'>
     <h5>{item.name}</h5>
     </div>

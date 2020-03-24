@@ -1,31 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
-.overlay {
-    position: fixed;
-    top: 40;
-    left: 40;
-    right: 40;
-    bottom: 40;
-    background: rgba(0, 0, 0, 0.6);
-}
-.modal__explore {
-    position: absolute;
-    max-width: 100%;
-    -webkit-box-shadow: -2px 0px 10px -1px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: -2px 0px 10px -1px rgba(0, 0, 0, 0.6);
-    box-shadow: -2px 0px 10px -1px rgba(0, 0, 0, 0.6);
-    border-radius: 5px;
-    z-index: 1;
-    top: 70px;
-    left: 230px;
-    right: 230px;
-    bottom: 140px;
-    background-color: white;
-    overflow-y: auto;
-    -ms-overflow-style: none;
-}
-.modal__explore::-webkit-scrollbar {
-    display: none;
-}
+
 .form__wrapper {
     width: 100%;
     font-family: Roboto;
@@ -68,15 +42,18 @@
         color: #fff;
         }
 }
+
 .pantry__card {
-    border: 1px solid red;
-    display: block;
-    width: 200px;
-    background: #fff;
-    text-transform: capitalize;
-    box-shadow: 2px 0px 5px -1px rgba(0, 0, 0, 0.6);
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    margin: 0 20px 20px 0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
         h5{
             text-align: center;
         }
+}
+.pantry__container {
+    margin: 0px 40px 0px 40px;
 }

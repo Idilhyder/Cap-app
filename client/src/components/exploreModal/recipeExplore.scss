@@ -2,13 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap');
 
 .card {
+    font-family: Ubuntu Condensed;
     display: flex;
     flex-wrap: wrap;
 }
 .card__title {
+    font-family: Ubuntu Condensed;
     font-size: 36px;
 }
 .card__text {
+    font-family: Ubuntu Condensed;
     justify-content: right;
     p {
         font-weight: bold;

@@ -38,7 +38,7 @@ componentDidMount = () => {
 handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
-    query: this.search.value,
+    query: this.search.value
     })
 }
 

@@ -33,30 +33,30 @@ router.get('/search/:query', (req, res) => {
     });
 })
 
-// SEARCH MULTIPLE KEYWORDS
-router.get('/search/meal/:body', function(req, res){
-    const query = RecipeItem.apiQuery(req.params.body);
-    RecipeItem.aggregate(
-        [
-          { $match: { $text: { $search: query } } },
-          { $sort: { score: { $meta: "textScore" } } },
-          { $project: { ingredients: 1, _id: 0 } },
-          { $unwind : "$ingredients" }
-        ]
-     )
-     RecipeItem.find({
-        "$text": {
-            "$search": query
-        }
-     })
-    .limit(5)
-    .then(recipeFound => {
-        return res.status(200).json(recipeFound)
-    })
-    .catch ((error) => {
-        console.log('error:', error)
-    });
-});
+// // SEARCH MULTIPLE KEYWORDS
+// router.get('/search/meal/:body', function(req, res){
+//     const query = RecipeItem.apiQuery(req.params.body);
+//     RecipeItem.aggregate(
+//         [
+//           { $match: { $text: { $search: query } } },
+//           { $sort: { score: { $meta: "textScore" } } },
+//           { $project: { ingredients: 1, _id: 0 } },
+//           { $unwind : "$ingredients" }
+//         ]
+//      )
+//      RecipeItem.find({
+//         "$text": {
+//             "$search": query
+//         }
+//      })
+//     .limit(5)
+//     .then(recipeFound => {
+//         return res.status(200).json(recipeFound)
+//     })
+//     .catch ((error) => {
+//         console.log('error:', error)
+//     });
+// });
 
 
 // GET ONE RECIPE
