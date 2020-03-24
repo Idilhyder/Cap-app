@@ -4,17 +4,12 @@
 .card {
     display: flex;
     flex-wrap: wrap;
-    ul {
-        list-style: none;
-    }
 }
 .card__title {
     font-size: 36px;
-    font-family: Unica One;
 }
 .card__text {
     justify-content: right;
-    font-family: Unica One;
     p {
         font-weight: bold;
     }

@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+.overlay {
+    position: fixed;
+    top: 40;
+    left: 40;
+    right: 40;
+    bottom: 40;
+    background: rgba(0, 0, 0, 0.6);
+}
+.modal__explore {
+    position: absolute;
+    max-width: 100%;
+    -webkit-box-shadow: -2px 0px 10px -1px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: -2px 0px 10px -1px rgba(0, 0, 0, 0.6);
+    box-shadow: -2px 0px 10px -1px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    z-index: 1;
+    top: 70px;
+    left: 230px;
+    right: 230px;
+    bottom: 140px;
+    background-color: white;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+}
+.modal__explore::-webkit-scrollbar {
+    display: none;
+}
+.form__wrapper {
+    width: 100%;
+    font-family: Roboto;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    h2{
+        padding-top: 5%;
+        align-items: center;
+    }
+}
+.modal__label{
+    font-weight: 600;
+}
+.pantry__input{
+    width: 12.75em;
+    height: 0.85em;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #afafaf;
+    margin-top: 5%;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+.pantrybtn {
+    width: 5rem;
+    border: solid 2px #000;
+    background: transparent;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: 0.4s;
+    cursor: pointer;
+        &:hover {
+        background: #000;
+        color: #fff;
+        }
+}
+.pantry__card {
+    border: 1px solid red;
+    display: block;
+    width: 200px;
+    background: #fff;
+    text-transform: capitalize;
+    box-shadow: 2px 0px 5px -1px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+        h5{
+            text-align: center;
+        }
+}

@@ -8,6 +8,8 @@ import RecipeExploreModal from "./../exploreModal/recipeExplore";
 import Img from 'react-image';
 import "./../recipeSearch/recipe.scss";
 import Pantry from "./../pantry/pantry";
+import PantryModal from './../pantry/pantryModal';
+import Portal from './../useModalHooks/useModal'
 
 
 
@@ -44,11 +46,9 @@ class Select extends Component {
     handleInputChange = (event) => {
         event.preventDefault();
         this.setState({
-        
+            isOpen:false
         })
     }
-    
-    
     handleSubmit = (event) => {
         event.preventDefault();
         this.getRecipeItem();
@@ -88,7 +88,6 @@ render() {
     )
     })} 
     </div>
-    <Pantry/>
     </div>
         </>
     );

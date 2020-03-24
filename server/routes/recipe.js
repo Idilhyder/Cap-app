@@ -24,7 +24,7 @@ router.get('/search/:query', (req, res) => {
             "$search": req.params.query
         }
     })
-    .limit(1)
+    .limit(10)
     .then(recipeFound => {
         return res.status(200).json(recipeFound)
     })
@@ -34,7 +34,7 @@ router.get('/search/:query', (req, res) => {
 })
 
 // SEARCH MULTIPLE KEYWORDS
-router.get('/search/meal', function(req, res){
+router.get('/search/meal/:body', function(req, res){
     const query = RecipeItem.apiQuery(req.params.body);
     RecipeItem.aggregate(
         [

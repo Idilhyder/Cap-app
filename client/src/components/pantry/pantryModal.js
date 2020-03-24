@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
-import "./pantry.scss";
+import "./pantryModal.scss";
 import axios from 'axios';
 
 class PantryModal extends Component {
@@ -67,36 +67,37 @@ class PantryModal extends Component {
         appElement={document.getElementById('portal')}
 
     >
-    <form onSubmit={this.submit}
-    id="modal__form"  method="post"
-    className="form__wrapper"
-    >
-    <div className="form-input">
-    <label
-    className="modal__label"
-    for="name"> Input your Ingredients</label>
+    <form onSubmit={this.submit}>
+    <div className="form__wrapper">
+    <button className="pantrybtn"
+        onClick={this.props.close}>Close</button>
+    <h2> Input your Pantry Items</h2>
         <input
+        className='pantry__input'
         type='text'
         name='name'
         placeholder="Enter item"
         value={this.state.name}
         onChange={this.handleInputChange}
         />
-        </div>
-        <button>Submit</button>
-        <button onClick={this.props.close}>Close</button>
+        <button className="pantrybtn">Submit</button>
+        
+    </div>
     </form>
-    <div className="card-body">
+   
+    
         {this.state.pantry.map(item =>{
         return (
         <>
     <div key={item.id}>
-    <h5 className="card-title">{item.name}</h5>
+        <div className='pantry__card'>
+    <h5>{item.name}</h5>
+    </div>
     </div>
         </>
         )
         })} 
-    </div>
+    
         </ReactModal>
         </>
         )
