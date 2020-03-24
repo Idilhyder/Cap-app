@@ -64,7 +64,13 @@ router.patch('/:id', (req, res) => {
 
 // DELETE ONE PANTRY ITEM
 router.delete('/:id', (req, res) => {
-    
+    PantryItem.findByIdAndRemove(req.params.id)
+    .then(pantryFound => {
+        return res.status(200).json(pantryFound)
+    })
+    .catch ((error) => {
+        console.log('error:', error)
+    });
 })
 
 

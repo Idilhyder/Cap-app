@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import "./pantryModal.scss";
 import axios from 'axios';
+import Icon from '@material-ui/core/Icon';
+import { Checkbox } from 'semantic-ui-react'
 
 class PantryModal extends Component {
     constructor() {
@@ -22,6 +24,24 @@ class PantryModal extends Component {
         console.log('Error retrieving pantry')
     });
     }
+    deletePantryItem=(event)=> {
+        axios.delete(`http://localhost:5000/pantry/${this.state.id}`)
+        .then((response)=> {
+            const data= response.data.pantryData;
+            this.setState({ pantry: data});
+            console.log('Pantry item deleted')
+        })
+        .catch(() => {
+            console.log('Error retrieving pantry')
+        });
+    }
+    handleDelete = (event) => {
+        event.preventDefault();
+        this.setState({ 
+            id: event.target.value 
+        });
+    }
+    
     handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
@@ -63,7 +83,7 @@ class PantryModal extends Component {
     <ReactModal
         isOpen={this.props.isOpen}
         onRequestClose={this.props.close}
-        className="modal__explore overlay"
+        className="pmodal__explore overlay"
         appElement={document.getElementById('portal')}
 
     >
@@ -88,10 +108,13 @@ class PantryModal extends Component {
         return (
         <>
     <div className="pantry__container"
-    key={item.id}>
-        <div className='pantry__card'>
-    <h5>{item.name}</h5>
+        key={item.id}>
+        <div className="pantrybtn">
+        <h5>{item.name}</h5>
     </div>
+    <button 
+        onClick={this.handleDelete}
+        className="pantrybtn">Delete</button>
     </div>
         </>
         )

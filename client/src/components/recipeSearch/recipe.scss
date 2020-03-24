@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
 .recipe {
-    font-family: Roboto;
+    font-family: Roboto Slab;
     display: flex;
     flex-direction: column;
     background: #fff;
@@ -26,23 +26,15 @@
 }
 
 &__title {
-    margin: 0.5rem auto;
     font-size: large;
     padding-top: 5%;
+    font-family: Roboto Slab;
 }
 
-&__text {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    h3 {
-    color: palevioletred;
-    }
-    h5 {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    }
+&_text {
+    font-family: Roboto Slab;
+    width: 100%;
+    
 }
 
 &__button {

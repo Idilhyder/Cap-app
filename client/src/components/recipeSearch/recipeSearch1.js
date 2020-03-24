@@ -7,6 +7,7 @@ class RecipeSearch extends Component {
 state = {
     query: '',
     results: [],
+    search:[],
     showModal: false
 }
 
@@ -14,12 +15,32 @@ getRecipeItem = () => {
     console.log('get recipe called')
     console.log(this.state.query)
 
-    axios.get(`http://localhost:5000/recipe/search/${this.state.query}`)
+    axios.get(`http://localhost:5000/recipe/roulette/${this.state.query}`)
     .then((response)=> {
         const data= response.data;
         console.log(data)
         this.setState({ results: data});
         this.handleOpenModal();
+        this.resetUserInputs();
+        
+        console.log('Recipe received')
+        
+      })
+      .catch(() => {
+        console.log('Error retrieving recipe')
+      });
+}
+getRecipeSearchItem = () => {
+    console.log('get recipe called')
+    console.log(this.state.query)
+
+    axios.get(`http://localhost:5000/recipe/search/${this.state.query}`)
+    .then((response)=> {
+        const data= response.data;
+        console.log(data)
+        this.setState({ search: data});
+        this.handleOpenModal();
+        this.resetUserInputs();
         
         console.log('Recipe received')
         
@@ -54,6 +75,11 @@ handleInputChange = (event) => {
     event.preventDefault();
     this.getRecipeItem();
 }
+resetUserInputs = () => {
+    this.setState({
+      query: '',
+    });
+  };
 
 render() {
     console.log(this.state.results)

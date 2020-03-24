@@ -32,6 +32,21 @@ router.get('/search/:query', (req, res) => {
         console.log('error:', error)
     });
 })
+router.get('/roulette/:query', (req, res) => { 
+    const query = RecipeItem.apiQuery(req.query)
+    .find({
+        "$text": {
+            "$search": req.params.query
+        }
+    })
+    .limit(1)
+    .then(recipeFound => {
+        return res.status(200).json(recipeFound)
+    })
+    .catch ((error) => {
+        console.log('error:', error)
+    });
+})
 
 // // SEARCH MULTIPLE KEYWORDS
 // router.get('/search/meal/:body', function(req, res){
